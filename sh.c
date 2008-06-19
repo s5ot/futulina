@@ -41,10 +41,6 @@ int main(int argc, char *argv[])
       //break;
     }
 
-    parg = malloc(sizeof buf2);
-    strcpy(parg, buf_pos);
-    commands[i] =  parg;
-
     /*
     for(i=0;i<5;i++) {
       printf("%d:%s\n", i,commands[i]);
