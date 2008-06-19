@@ -28,7 +28,6 @@ int main(int argc, char *argv[])
   pos = commands;
   buf_pos = buf;
 
-  fprintf(stdout, "$");
   while((fgets(buf_pos, sizeof buf, stdin) != NULL)) {
     i = 0;
     while((p = strchr(buf_pos, SPACE)) != NULL) {
@@ -51,14 +50,15 @@ int main(int argc, char *argv[])
     for(i=0;i<5;i++) {
       printf("%d:%s\n", i,commands[i]);
     }
-    pid = fork();
 */
+    pid = fork();
+
     if(pid < 0) {
       exit(EXIT_FAILURE);
     } 
 
     if(pid == 0) {
-      execvp(commands[0], commands);
+      execv(commands[0], commands);
       exit(EXIT_FAILURE);
     } else {
       int status;
@@ -79,7 +79,6 @@ int main(int argc, char *argv[])
     for(i=0;i<5;i++) {
       commands[i] = NULL;
     }
-    fprintf(stdout, "$");
   }
 
   exit(EXIT_SUCCESS);
