@@ -14,10 +14,11 @@ int main(int argc, char *argv[])
   char buf[1024];
   char buf2[1024];
   //char buf3[1024];
-  //pid_t pid;
+  pid_t pid;
   char *p;
   char *parg;
-  char *commands[5];
+  char *commands[5] = {NULL,NULL,NULL,NULL,NULL};
+  char **commands_ptr;
   char **pos;
 //  char *path;
   //int flg = 0;
@@ -39,56 +40,24 @@ int main(int argc, char *argv[])
       i++;
       //break;
     }
-    
-      parg = malloc(sizeof buf2);
-      strcpy(parg, buf_pos);
-      commands[i] =  parg;
 
-    i=0;
-    while(commands[i] != NULL) {
-    printf("%d:%s\n",i, commands[i]);
-    i++;
-    }
-//  for(i = 0; i < 5; i++) {
-//    printf("%s\n", commands[i]);
-//  }
-    //printf("%s\n", buf[p - buf_pos]);
+    parg = malloc(sizeof buf2);
+    strcpy(parg, buf_pos);
+    commands[i] =  parg;
+
     /*
-    while((p = strchr(buf, SPACE)) != NULL) {
-      strncpy(buf, path, bufpos - p);
-      path[bufpos - p - 1] = '\0';
-      commands[i] = path;
-      i++;
-      bufpos = p;
+    for(i=0;i<5;i++) {
+      printf("%d:%s\n", i,commands[i]);
     }
-    break;
-    */
-
-  }
-  exit(EXIT_SUCCESS);
-} 
-/*
-  
-      } else { 
-        if(commands == NULL)
-          commands = malloc(sizeof(**char));
-        if(realloc(commands, (sizeof(commands)+sizeof(char*))) != NULL) 
-          strcpy(*commands, p);
-      } 
-    }
-    if(realloc(commands, (sizeof(commands)+sizeof(char*))) != NULL)
-      strcpy(*commands, "\0");
-  
-
-    commands = pos;
+*/
     pid = fork();
 
     if(pid < 0) {
-      exit(1);
+      exit(EXIT_FAILURE);
     } 
 
     if(pid == 0) {
-      execv(path, commands);
+      execv(commands[0], commands);
       exit(EXIT_FAILURE);
     } else {
       int status;
@@ -106,8 +75,10 @@ int main(int argc, char *argv[])
 
      // exit(EXIT_SUCCESS);
     }
+    for(i=0;i<5;i++) {
+      commands[i] = NULL;
+    }
   }
 
   exit(EXIT_SUCCESS);
 }
-*/
