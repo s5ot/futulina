@@ -28,6 +28,7 @@ int main(int argc, char *argv[])
   pos = commands;
   buf_pos = buf;
 
+  fprintf(stdout, "$");
   while((fgets(buf_pos, sizeof buf, stdin) != NULL)) {
     i = 0;
     while((p = strchr(buf_pos, SPACE)) != NULL) {
@@ -43,6 +44,7 @@ int main(int argc, char *argv[])
 
     parg = malloc(sizeof buf2);
     strcpy(parg, buf_pos);
+    parg[strlen(parg) -1] = '\0';
     commands[i] =  parg;
 
     /*
@@ -57,7 +59,7 @@ int main(int argc, char *argv[])
     } 
 
     if(pid == 0) {
-      execv(commands[0], commands);
+      execvp(commands[0], commands);
       exit(EXIT_FAILURE);
     } else {
       int status;
@@ -78,6 +80,7 @@ int main(int argc, char *argv[])
     for(i=0;i<5;i++) {
       commands[i] = NULL;
     }
+    fprintf(stdout, "$");
   }
 
   exit(EXIT_SUCCESS);
