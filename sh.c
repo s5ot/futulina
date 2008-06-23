@@ -39,15 +39,15 @@ int main(int argc, char *argv[])
       i++;
       //break;
     }
-    
-      parg = malloc(sizeof buf2);
-      strcpy(parg, buf_pos);
-      commands[i] =  parg;
+
+    parg = malloc(sizeof buf2);
+    strcpy(parg, buf_pos);
+    commands[i] =  parg;
 
     i=0;
     while(commands[i] != NULL) {
-    printf("%d:%s\n",i, commands[i]);
-    i++;
+      printf("%d:%s\n",i, commands[i]);
+      i++;
     }
 //  for(i = 0; i < 5; i++) {
 //    printf("%s\n", commands[i]);
