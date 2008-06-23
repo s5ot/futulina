@@ -51,9 +51,8 @@ int main(int argc, char *argv[])
     for(i=0;i<5;i++) {
       printf("%d:%s\n", i,commands[i]);
     }
-*/
     pid = fork();
-
+*/
     if(pid < 0) {
       exit(EXIT_FAILURE);
     } 
